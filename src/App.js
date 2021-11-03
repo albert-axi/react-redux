@@ -1,7 +1,12 @@
 import './App.css';
-import { connect } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 
-function App({count, increment, decrement}) {
+function App() {
+  const count = useSelector(state => state.count)
+  const dispatch = useDispatch()
+  const increment = () => dispatch({ type: "increment" })
+  const decrement = () => dispatch({ type: "decrement" })
+  
   return (
     <div className="App">
       {count}
@@ -12,14 +17,4 @@ function App({count, increment, decrement}) {
   );
 }
 
-const mapStateToProps = state => ({
-  count: state.count,
-  click: state.count
-})
-
-const mapDispatchToProps = dispatch => ({
-  increment: () => dispatch({ type: 'increment' }),
-  decrement: () => dispatch({ type: 'decrement' }) 
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
