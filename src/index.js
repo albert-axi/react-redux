@@ -3,19 +3,27 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
 import { Provider } from "react-redux"
 import countReducer from './reducers/countReducer'
+import authorsReducer from "./reducers/authorsReducer"
+import booksReducer from "./reducers/booksReducer"
+
+const rootReducer = combineReducers({
+  count: countReducer,
+  authors: authorsReducer,
+  books: booksReducer
+});
 
 const store = createStore(
-  countReducer,
+  rootReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App/>
+      <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

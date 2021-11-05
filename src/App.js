@@ -1,18 +1,17 @@
 import './App.css';
-import { useSelector, useDispatch } from "react-redux"
+// import { connect } from "react-redux"
+// import {actions, createAction} from "./actions/actionCreators"
+import Authors from './components/authors'
+import Books from './components/books';
+import BookForm from './components/bookForm';
 
-function App() {
-  const count = useSelector(state => state.count)
-  const dispatch = useDispatch()
-  const increment = () => dispatch({ type: "increment" })
-  const decrement = () => dispatch({ type: "decrement" })
+function App(props) {
   
   return (
     <div className="App">
-      {count}
-      <br/>
-      <button onClick={decrement}>-</button>
-      <button onClick={increment}>+</button>
+      <BookForm />
+      <Books />
+      <Authors />
     </div>
   );
 }
