@@ -3,21 +3,32 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { createStore, combineReducers } from 'redux'
+import {
+  createStore,
+  combineReducers,
+  applyMiddleware,
+  compose
+} from 'redux'
 import { Provider } from "react-redux"
+import thunk from "redux-thunk";
 import countReducer from './reducers/countReducer'
 import authorsReducer from "./reducers/authorsReducer"
 import booksReducer from "./reducers/booksReducer"
+import astronautsReducer from './reducers/astronautsReducer'
 
 const rootReducer = combineReducers({
   count: countReducer,
   authors: authorsReducer,
-  books: booksReducer
+  books: booksReducer,
+  astronauts: astronautsReducer
 });
 
 const store = createStore(
   rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  compose(
+    applyMiddleware(thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
 );
 
 ReactDOM.render(
